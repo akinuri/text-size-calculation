@@ -57,12 +57,6 @@
             id="other-chars"
             >
     </div>
-    <button
-        class="bg-slate-50 rounded px-3 py-1 shadow hover:bg-slate-100 active:bg-slate-100/70"
-        onclick="printLetters()"
-        >
-        Print Letters
-    </button>
 </div>
 
 <hr class="my-4 border-slate-300">
@@ -97,7 +91,18 @@
         lettersContainer.style.fontFamily = value;
     });
     
-    printLetters();
+    uppercaseLettersBox.addEventListener("input", printUppercaseLetters);
+    lowercaseLettersBox.addEventListener("input", printLowercaseLetters);
+    digitsBox.addEventListener("input", printDigits);
+    otherCharsBox.addEventListener("input", printOtherCharacters);
+    [
+        uppercaseLettersBox,
+        lowercaseLettersBox,
+        digitsBox,
+        otherCharsBox,
+    ].forEach(el => el.dispatchEvent(new Event("input")));
+    
+    // #region ==================== FUNCTIONS
     
     async function loadLocalFonts(callerBtn) {
         let fonts = await getFontData();
@@ -124,6 +129,7 @@
             console.error(err.name, err.message);
         }
     }
+    
     function groupByProperty(arr, property) {
         return arr.reduce((acc, obj) => {
             const key = obj[property];
@@ -135,24 +141,33 @@
         }, {});
     }
     
-    function printLetters() {
+    function printUppercaseLetters() {
         uppercaseContainer.innerHTML = "";
         uppercaseLettersBox.value.split("").forEach(letter => {
             uppercaseContainer.innerHTML += `<div class="bg-white shadow">${letter}</div>`;
         });
+    }
+    function printLowercaseLetters() {
         lowercaseContainer.innerHTML = "";
         lowercaseLettersBox.value.split("").forEach(letter => {
             lowercaseContainer.innerHTML += `<div class="bg-white shadow">${letter}</div>`;
         });
+    }
+    function printDigits() {
         digitsContainer.innerHTML = "";
         digitsBox.value.split("").forEach(digit => {
             digitsContainer.innerHTML += `<div class="bg-white shadow">${digit}</div>`;
         });
+    }
+    function printOtherCharacters() {
         otherContainer.innerHTML = "";
         otherCharsBox.value.split("").forEach(letter => {
             otherContainer.innerHTML += `<div class="bg-white shadow">${letter}</div>`;
         });
     }
+    
+    //#endregion
+    
 </script>
 
 </body>
