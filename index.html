@@ -40,11 +40,20 @@
             >
     </div>
     <div>
+        <span class="inline-block w-20">Numbers</span>
+        <input
+            type="text"
+            class="px-2 py-1 border border-slate-300 w-96 rounded"
+            value="0123456789"
+            id="numbers"
+            >
+    </div>
+    <div>
         <span class="inline-block w-20">Other</span>
         <input
             type="text"
             class="px-2 py-1 border border-slate-300 w-96 rounded"
-            value="&nbsp;!&quot;\#$%&'()*+,-./:;<=\&gt;?@[\]^_`{|}~"
+            value="&nbsp;!&quot;\#$%&'()*+,-./:;<=\&gt;?@[\]^_`{|}~€₺"
             id="other-letters"
             >
     </div>
@@ -61,6 +70,7 @@
 <div id="letters-container" class="flex flex-col gap-4 font-[Arial] text-[50px] leading-none">
     <div class="flex items-center gap-4" id="uppercase-container"></div>
     <div class="flex items-center gap-4" id="lowercase-container"></div>
+    <div class="flex items-center gap-4" id="numbers-container"></div>
     <div class="flex items-center gap-4" id="other-container"></div>
 </div>
 
@@ -71,10 +81,12 @@
     
     let uppercaseContainer  = document.querySelector("#uppercase-container");
     let lowercaseContainer  = document.querySelector("#lowercase-container");
+    let numbersContainer    = document.querySelector("#numbers-container");
     let otherContainer      = document.querySelector("#other-container");
     
     let uppercaseLettersBox = document.querySelector("#uppercase-letters");
     let lowercaseLettersBox = document.querySelector("#lowercase-letters");
+    let numbersBox          = document.querySelector("#numbers");
     let otherLettersBox     = document.querySelector("#other-letters");
     
     localFontsEl.addEventListener("change", () => {
@@ -131,6 +143,10 @@
         lowercaseContainer.innerHTML = "";
         lowercaseLettersBox.value.split("").forEach(letter => {
             lowercaseContainer.innerHTML += `<div class="bg-white shadow">${letter}</div>`;
+        });
+        numbersContainer.innerHTML = "";
+        numbersBox.value.split("").forEach(number => {
+            numbersContainer.innerHTML += `<div class="bg-white shadow">${number}</div>`;
         });
         otherContainer.innerHTML = "";
         otherLettersBox.value.split("").forEach(letter => {
