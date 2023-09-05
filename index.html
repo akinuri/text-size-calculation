@@ -71,6 +71,17 @@
     <div class="flex items-center gap-4" id="other-container"></div>
 </div>
 
+<hr class="my-4 border-slate-300">
+
+<div class="flex gap-4 items-start text-slate-700">
+    <button
+        class="bg-slate-50 rounded px-3 py-1 shadow hover:bg-slate-100 active:bg-slate-100/70"
+        onclick="printCharWidthRatios()"
+        >
+        Calculate Widths
+    </button>
+</div>
+
 <script>
     let localFontsEl = document.querySelector("#local-fonts");
     
@@ -167,6 +178,58 @@
         otherCharsBox.value.split("").forEach(letter => {
             otherContainer.innerHTML += `<div class="bg-white shadow">${letter}</div>`;
         });
+    }
+    
+    function printCharWidthRatios() {
+        let charWidthRatios = calculateCharWidthRatios();
+        let containers = {
+            uppercase : uppercaseContainer,
+            lowercase : lowercaseContainer,
+            digit     : digitsContainer,
+            other     : otherContainer,
+        };
+        for (let containerName in containers) {
+            let containerEl = containers[containerName];
+            for (let charEl of Array.from(containerEl.children)) {
+                let char = charEl.textContent.trim();
+                if (char == "") {
+                    char = " ";
+                }
+                charEl.title = charWidthRatios[containerName][char];
+                charEl.classList.add("shadow", "shadow-sky-500/50");
+            }
+        }
+    }
+    
+    function calculateCharWidthRatios() {
+        let charWidths = {
+            uppercase : {},
+            lowercase : {},
+            digit     : {},
+            other     : {},
+        };
+        let containers = {
+            uppercase : uppercaseContainer,
+            lowercase : lowercaseContainer,
+            digit     : digitsContainer,
+            other     : otherContainer,
+        };
+        for (let containerName in containers) {
+            let containerEl = containers[containerName];
+            for (let charEl of Array.from(containerEl.children)) {
+                let char   = charEl.textContent.trim();
+                if (char == "") {
+                    char = " ";
+                }
+                let width  = getComputedStyle(charEl).width;
+                let height = getComputedStyle(charEl).height;
+                width  = parseFloat(width);
+                height = parseFloat(height);
+                let widthRatio = width / height;
+                charWidths[containerName][char] = widthRatio;
+            }
+        }
+        return charWidths;
     }
     
     //#endregion
