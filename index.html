@@ -9,20 +9,23 @@
 <body class="bg-slate-200 p-4">
 
 <div class="flex flex-col gap-4 items-start text-slate-700">
-    <div class="flex gap-4 items-center">
-        <select id="local-fonts" class="p-2 rounded shadow" data-placeholder="Select a font">
-            <option class="text-gray-400">Select a font</option>
-            <option selected style="font-family: Arial, sans-serif;">Arial</option>
-        </select>
-        <button
-            class="bg-slate-50 rounded px-3 py-1 shadow hover:bg-slate-100 active:bg-slate-100/70"
-            onclick="loadLocalFonts(this)"
-            >
-            Load Local Fonts
-        </button>
+    <div>
+        <span class="inline-block w-24">Font Family</span>
+        <div class="inline-flex gap-3 items-center">
+            <select id="local-fonts" class="p-2 rounded shadow" data-placeholder="Select a font">
+                <option class="text-gray-400">Select a font</option>
+                <option selected style="font-family: Arial, sans-serif;">Arial</option>
+            </select>
+            <button
+                class="bg-slate-50 rounded px-3 py-1 shadow hover:bg-slate-100 active:bg-slate-100/70"
+                onclick="loadLocalFonts(this)"
+                >
+                Load Local Fonts
+            </button>
+        </div>
     </div>
     <div>
-        <span class="inline-block w-20">Uppercase</span>
+        <span class="inline-block w-24">Uppercase</span>
         <input
             type="text"
             class="px-2 py-1 border border-slate-300 w-96 rounded"
@@ -31,7 +34,7 @@
             >
     </div>
     <div>
-        <span class="inline-block w-20">Lowercase</span>
+        <span class="inline-block w-24">Lowercase</span>
         <input
             type="text"
             class="px-2 py-1 border border-slate-300 w-96 rounded"
@@ -40,7 +43,7 @@
             >
     </div>
     <div>
-        <span class="inline-block w-20">Digits</span>
+        <span class="inline-block w-24">Digits</span>
         <input
             type="text"
             class="px-2 py-1 border border-slate-300 w-96 rounded"
@@ -49,7 +52,7 @@
             >
     </div>
     <div>
-        <span class="inline-block w-20">Other</span>
+        <span class="inline-block w-24">Other</span>
         <input
             type="text"
             class="px-2 py-1 border border-slate-300 w-96 rounded"
