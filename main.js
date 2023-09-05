@@ -48,25 +48,6 @@ async function loadLocalFonts(callerBtn) {
     });
     callerBtn.remove();
 }
-async function getFontData() {
-    try {
-        let fonts = await window.queryLocalFonts();
-        let fontFamilies = groupByProperty(fonts, "family");
-        return fontFamilies;
-    } catch (err) {
-        console.error(err.name, err.message);
-    }
-}
-function groupByProperty(arr, property) {
-    return arr.reduce((acc, obj) => {
-        const key = obj[property];
-        if (!acc[key]) {
-            acc[key] = [];
-        }
-        acc[key].push(obj);
-        return acc;
-    }, {});
-}
 
 function printUppercaseLetters() {
     uppercaseContainer.innerHTML = "";
@@ -94,13 +75,13 @@ function printOtherCharacters() {
 }
 
 function printCharWidthRatios() {
-    let charWidthRatios = calculateCharWidthRatios();
     let containers = {
         uppercase : uppercaseContainer,
         lowercase : lowercaseContainer,
         digit     : digitsContainer,
         other     : otherContainer,
     };
+    let charWidthRatios = calculateCharWidthRatios(containers);
     for (let containerName in containers) {
         let containerEl = containers[containerName];
         for (let charEl of Array.from(containerEl.children)) {
@@ -112,35 +93,4 @@ function printCharWidthRatios() {
             charEl.classList.add("shadow", "shadow-sky-500/50");
         }
     }
-}
-
-function calculateCharWidthRatios() {
-    let charWidths = {
-        uppercase : {},
-        lowercase : {},
-        digit     : {},
-        other     : {},
-    };
-    let containers = {
-        uppercase : uppercaseContainer,
-        lowercase : lowercaseContainer,
-        digit     : digitsContainer,
-        other     : otherContainer,
-    };
-    for (let containerName in containers) {
-        let containerEl = containers[containerName];
-        for (let charEl of Array.from(containerEl.children)) {
-            let char   = charEl.textContent.trim();
-            if (char == "") {
-                char = " ";
-            }
-            let width  = getComputedStyle(charEl).width;
-            let height = getComputedStyle(charEl).height;
-            width  = parseFloat(width);
-            height = parseFloat(height);
-            let widthRatio = width / height;
-            charWidths[containerName][char] = widthRatio;
-        }
-    }
-    return charWidths;
 }
