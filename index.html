@@ -185,8 +185,7 @@
             return;
         }
         localFontsEl.lastElementChild.remove();
-        let fontFamilies = groupByProperty(fonts, "family");
-        Object.keys(fontFamilies).forEach(family => {
+        Object.keys(fonts).forEach(family => {
             let selected = "";
             if (family == "Arial") {
                 selected = " selected";
@@ -199,12 +198,13 @@
     }
     async function getFontData() {
         try {
-            return await window.queryLocalFonts();
+            let fonts = await window.queryLocalFonts();
+            let fontFamilies = groupByProperty(fonts, "family");
+            return fontFamilies;
         } catch (err) {
             console.error(err.name, err.message);
         }
     }
-    
     function groupByProperty(arr, property) {
         return arr.reduce((acc, obj) => {
             const key = obj[property];
