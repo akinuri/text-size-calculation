@@ -92,7 +92,7 @@
 
 <hr class="my-4 border-slate-300">
 
-<div class="flex flex-col gap-4 items-start">
+<div class="flex flex-col gap-4 items-start mb-[20vh]">
     
     <div class="flex items-start">
         <span class="inline-block mr-4">Enter text to test</span>
@@ -100,6 +100,7 @@
             class="bg-white shadow outline-dashed w-fit min-w-[2rem] max-w-[30rem] outline-1 outline-slate-400 leading-none mt-1"
             style="font-family: var(--font-family)"
             contenteditable
+            oninput="printTextSize()"
             ></div>
     </div>
     
@@ -115,21 +116,21 @@
         <tbody>
             <tr>
                 <td>Width</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="html-width"></td>
+                <td id="calc-width"></td>
+                <td id="match-width"></td>
             </tr>
             <tr>
                 <td>Height</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="html-height"></td>
+                <td id="calc-height"></td>
+                <td id="match-height"></td>
             </tr>
             <tr>
                 <td>Lines</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="html-lines"></td>
+                <td id="calc-lines"></td>
+                <td id="match-lines"></td>
             </tr>
         </tbody>
     </table>

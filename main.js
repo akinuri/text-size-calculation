@@ -13,6 +13,18 @@ let lowercaseContainer  = document.querySelector("#lowercase-container");
 let digitsContainer     = document.querySelector("#digits-container");
 let otherContainer      = document.querySelector("#other-container");
 
+let output = {
+    htmlWidth   : document.querySelector("#html-width"),
+    htmlHeight  : document.querySelector("#html-height"),
+    htmlLines   : document.querySelector("#html-lines"),
+    calcWidth   : document.querySelector("#calc-width"),
+    calcHeight  : document.querySelector("#calc-height"),
+    calcLines   : document.querySelector("#calc-lines"),
+    matchWidth  : document.querySelector("#match-width"),
+    matchHeight : document.querySelector("#match-height"),
+    matchLines  : document.querySelector("#match-lines"),
+};
+
 localFontSelect.addEventListener("input", changeFontFamily);
 
 uppercaseLettersBox.addEventListener("input", printUppercaseLetters);

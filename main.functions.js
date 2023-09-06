@@ -23,6 +23,7 @@ function changeFontFamily() {
     }
     document.body.style.setProperty("--font-family", value);
     updateCharWidthRatiosDict();
+    printTextSize();
 }
 
 function printUppercaseLetters() {
@@ -72,4 +73,32 @@ function updateCharWidthRatiosDict(containers) {
         let containerRatios = calculateCharWidthRatios(container);
         charWidthRatiosDict = Object.assign(charWidthRatiosDict, containerRatios);
     }
+}
+
+function printTextSize() {
+    let textEl     = document.querySelector("div[contentEditable]");
+    let text       = textEl.textContent.trim();
+    let htmlWidth  = parseFloat(getComputedStyle(textEl).width);
+    let htmlHeight = parseFloat(getComputedStyle(textEl).height);
+    let htmlLines  = htmlHeight / 16;
+    output.htmlWidth.textContent  = toFixed(htmlWidth, 3);
+    output.htmlHeight.textContent = toFixed(htmlHeight, 3);
+    output.htmlLines.textContent  = toFixed(htmlLines, 3);
+    let size = calcTextSize(text, 16, charWidthRatiosDict);
+    output.calcWidth.textContent   = toFixed(size.width, 3);
+    output.calcHeight.textContent  = toFixed(size.height, 3);
+    output.calcLines.textContent   = toFixed(size.lines, 3);
+    output.matchWidth.textContent  = toFixed(size.width / htmlWidth, 3);
+    output.matchHeight.textContent = toFixed(size.height / htmlHeight, 3);
+    output.matchLines.textContent  = toFixed(size.lines / htmlLines, 3);
+}
+
+function toFixed(number, precision) {
+    number = number.toFixed(precision);
+    let [int, fraction] = number.split(".");
+    number = int;
+    if (fraction && fraction != "0".repeat(fraction.length)) {
+        number = `${int}.${fraction}`;
+    }
+    return number;
 }
