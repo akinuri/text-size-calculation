@@ -6,7 +6,7 @@ async function loadLocalFonts(callerBtn) {
     localFontsEl.lastElementChild.remove();
     Object.keys(fonts).forEach(family => {
         let selected = "";
-        if (family == "Arial") {
+        if (family == defaultFontFamily) {
             selected = " selected";
         }
         localFontsEl.innerHTML += `
@@ -14,6 +14,14 @@ async function loadLocalFonts(callerBtn) {
         `;
     });
     callerBtn.remove();
+}
+
+function changeFontFamily() {
+    let value = localFontsEl.value;
+    if (value == localFontsEl.dataset.placeholder) {
+        value = defaultFontFamily;
+    }
+    document.body.style.setProperty("--font-family", value);
 }
 
 function printUppercaseLetters() {

@@ -1,6 +1,6 @@
-let localFontsEl = document.querySelector("#local-fonts");
+let defaultFontFamily = "Arial";
 
-let lettersContainer = document.querySelector("#letters-container");
+let localFontsEl = document.querySelector("#local-fonts");
 
 let uppercaseContainer  = document.querySelector("#uppercase-container");
 let lowercaseContainer  = document.querySelector("#lowercase-container");
@@ -12,13 +12,7 @@ let lowercaseLettersBox = document.querySelector("#lowercase-letters");
 let digitsBox           = document.querySelector("#digits");
 let otherCharsBox       = document.querySelector("#other-chars");
 
-localFontsEl.addEventListener("change", () => {
-    let value = localFontsEl.value;
-    if (value == localFontsEl.dataset.placeholder) {
-        value = "";
-    }
-    lettersContainer.style.fontFamily = value;
-});
+localFontsEl.addEventListener("input", changeFontFamily);
 
 uppercaseLettersBox.addEventListener("input", printUppercaseLetters);
 lowercaseLettersBox.addEventListener("input", printLowercaseLetters);

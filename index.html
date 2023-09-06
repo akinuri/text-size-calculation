@@ -22,7 +22,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-200 p-4">
+<body class="bg-slate-200 p-4 [--font-family:Arial]">
 
 <div class="flex flex-col gap-4 items-start text-slate-700">
     <div>
@@ -30,7 +30,7 @@
         <div class="inline-flex gap-3 items-center">
             <select id="local-fonts" class="p-2 rounded shadow" data-placeholder="Select a font">
                 <option class="text-gray-400">Select a font</option>
-                <option selected style="font-family: Arial, sans-serif;">Arial</option>
+                <option selected style="font-family: var(--font-family)">Arial</option>
             </select>
             <button
                 class="bg-slate-50 rounded px-3 py-1 shadow hover:bg-slate-100 active:bg-slate-100/70"
@@ -80,7 +80,10 @@
 
 <hr class="my-4 border-slate-300">
 
-<div id="letters-container" class="flex flex-col gap-4 font-[Arial] text-[50px] leading-none">
+<div
+    class="flex flex-col gap-4 text-[50px] leading-none"
+    style="font-family: var(--font-family)"
+    >
     <div class="flex items-center gap-4" id="uppercase-container"></div>
     <div class="flex items-center gap-4" id="lowercase-container"></div>
     <div class="flex items-center gap-4" id="digits-container"></div>
@@ -106,6 +109,7 @@
         <span class="inline-block mr-4">Enter text to test</span>
         <div
             class="bg-white shadow outline-dashed w-fit min-w-[2rem] max-w-[30rem] outline-1 outline-slate-400 leading-none mt-1"
+            style="font-family: var(--font-family)"
             contenteditable
             ></div>
     </div>
