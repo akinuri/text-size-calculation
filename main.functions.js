@@ -3,13 +3,13 @@ async function loadLocalFonts(callerBtn) {
     if (fonts.length == 0) {
         return;
     }
-    localFontsEl.lastElementChild.remove();
+    localFontSelect.lastElementChild.remove();
     Object.keys(fonts).forEach(family => {
         let selected = "";
         if (family == defaultFontFamily) {
             selected = " selected";
         }
-        localFontsEl.innerHTML += `
+        localFontSelect.innerHTML += `
             <option${selected} style="font-family: '${family}'">${family}</option>
         `;
     });
@@ -17,8 +17,8 @@ async function loadLocalFonts(callerBtn) {
 }
 
 function changeFontFamily() {
-    let value = localFontsEl.value;
-    if (value == localFontsEl.dataset.placeholder) {
+    let value = localFontSelect.value;
+    if (value == localFontSelect.dataset.placeholder) {
         value = defaultFontFamily;
     }
     document.body.style.setProperty("--font-family", value);
