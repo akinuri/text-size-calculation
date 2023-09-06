@@ -20,27 +20,22 @@ function groupByProperty(arr, property) {
     }, {});
 }
 
-function calculateCharWidthRatios(containers) {
-    let charWidths = {
-        uppercase : {},
-        lowercase : {},
-        digit     : {},
-        other     : {},
-    };
-    for (let containerName in containers) {
-        let containerEl = containers[containerName];
-        for (let charEl of Array.from(containerEl.children)) {
-            let char = charEl.textContent.trim();
-            if (char == "") {
-                char = " ";
-            }
-            let width  = getComputedStyle(charEl).width;
-            let height = getComputedStyle(charEl).height;
-            width  = parseFloat(width);
-            height = parseFloat(height);
-            let widthRatio = width / height;
-            charWidths[containerName][char] = widthRatio;
-        }
+function calculateCharWidthRatios(charElems) {
+    if (charElems instanceof HTMLElement) {
+        charElems = Array.from(charElems.children);
     }
-    return charWidths;
+    let ratios = {};
+    for (let charEl of charElems) {
+        let char = charEl.textContent.trim();
+        if (char == "") {
+            char = " ";
+        }
+        let width  = getComputedStyle(charEl).width;
+        let height = getComputedStyle(charEl).height;
+        width  = parseFloat(width);
+        height = parseFloat(height);
+        let widthRatio = width / height;
+        ratios[char] = widthRatio;
+    }
+    return ratios;
 }

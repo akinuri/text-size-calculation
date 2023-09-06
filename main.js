@@ -1,4 +1,5 @@
 let defaultFontFamily = "Arial";
+let charWidthRatiosDict = {};
 
 let localFontSelect = document.querySelector("#local-fonts");
 
